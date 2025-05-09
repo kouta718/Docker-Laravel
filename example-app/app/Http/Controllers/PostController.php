@@ -17,6 +17,7 @@ class PostController extends Controller
             'body' => $request->body
         ]);
 
+        $request->session()-flash('massage', '保存しました');
         return back();
     }
 }
