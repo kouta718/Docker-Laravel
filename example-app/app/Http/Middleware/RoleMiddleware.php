@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class RoleModdleware
+class RoleMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,6 +17,6 @@ class RoleModdleware
         if(auth()->user()->role == 'admin') {
             return $next($request);
         }
-        retrrn redirect()->route('dashboard');
+        return redirect()->route('dashboard');
     }
 }
