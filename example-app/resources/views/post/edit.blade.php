@@ -10,16 +10,17 @@
                 {{session('message')}}
             </div>
         @endif
-        <form method="post" action="{{ route('post.store')}}">@csrf
+        <form method="post" action="{{ route('post.update', $post)}}">@csrf
+            @method('patch')
             <div class="w-full flex flex-col">
                 <label for="title" class="font-semibold mt-4">件名</label>
                 <x-input-error :messages="$errors->get('title')" class="mt-2" />
-                <input type="text" name="title" class="w-auto py-2 border border-gray-300 rounded-md" id="title" value="{{old('title')}}">
+                <input type="text" name="title" class="w-auto py-2 border border-gray-300 rounded-md" id="title" value="{{old('title', $post->title)}}">
             </div>
             <div class="w-full flex flex-col">
                 <label for="body" class="font-semibold mt-4">本文</label>
                 <x-input-error :messages="$errors->get('body')" class="mt-2" />
-                <textarea name="body" class="w-auto py-2 border border-gray-300 rounded-md" id="body" cols="30" rows="5"> {{old('body')}} </textarea>
+                <textarea name="body" class="w-auto py-2 border border-gray-300 rounded-md" id="body" cols="30" rows="5"> {{old('body', $post->body)}} </textarea>
             </div>
 
             <x-primary-button class="mt-4">
