@@ -57,4 +57,9 @@ class PostController extends Controller
         $request->session()->flash('message', '更新しました');
         return back();
     }
+
+    public function destroy(Post $post) {
+        $post->delete();
+        return redirect()->route('post.index');
+    }
 }

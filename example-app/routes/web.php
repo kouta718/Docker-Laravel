@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Route::middleware('auth','admin')->group(function () {
-    Route::get('/post', [PostController::class, 'index']);
+    Route::get('/post', [PostController::class, 'index'])->name('post.index');
     Route::get('/post/create', [PostController::class, 'create']);
 // });
 
@@ -28,5 +28,7 @@ Route::get('/post/show/{post}', [PostController::class, 'show'])->name('post.sho
 
 Route::get('/post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
 Route::patch('/post/{post}', [PostController::class, 'update'])->name('post.update');
+
+Route::delete('/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
 
 require __DIR__.'/auth.php';
