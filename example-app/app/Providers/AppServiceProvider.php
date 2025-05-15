@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Gate::define('test', function (User $user) {
             if($user->id === 1) {
-            return true;
+                return true;
             }
             return false;
         });
