@@ -2,65 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index() {
-        $posts=Post::where('user_id', auth()->id())->get();
-        return view('post.index', compact('posts'));
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //
     }
 
-    public function create() {
-        return view('post.create');
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
     }
 
-    public function store(Request $request) {
-        Gate::authorize('test');
-
-        $validated = $request->validate([
-            'title' => 'required|max:20',
-            'body' => 'required|max:400',
-        ]);
-
-        $validated['user_id'] = auth()->id();
-
-        $post = Post::create($validated);
-
-        $request->session()->flash('message', '保存しました');
-        return back();
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
     }
 
-    public function show($id) {
-        $post = Post::find($id);
-        return view('post.show', compact('post'));
+    /**
+     * Display the specified resource.
+     */
+    public function show(Post $post)
+    {
+        //
     }
 
-    public function edit(Post $post) {
-        return view('post.edit', compact('post'));
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Post $post)
+    {
+        //
     }
 
-    public function update(Request $request, Post $post) {
-        Gate::authorize('test');
-
-        $validated = $request->validate([
-            'title' => 'required|max:20',
-            'body' => 'required|max:400',
-        ]);
-
-        $validated['user_id'] = auth()->id();
-
-        $post->update($validated);
-
-        $request->session()->flash('message', '更新しました');
-        return back();
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Post $post)
+    {
+        //
     }
 
-    public function destroy(Request $request, Post $post) {
-        $post->delete();
-        $request->session()->flash('message', '削除しました');
-        return redirect()->route('post.index');
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Post $post)
+    {
+        //
     }
 }
