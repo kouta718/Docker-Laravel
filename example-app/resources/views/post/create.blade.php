@@ -5,11 +5,13 @@
         </h2>
     </x-slot>
     <div class="max-w-7xl mx-auto px-6">
-        @if(session('message'))
+        {{-- @if(session('message'))
             <div class="text-red-600 font-bold">
                 {{session('message')}}
             </div>
-        @endif
+        @endif --}}
+        <x-message :message="session('message')" />
+
         <form method="post" action="{{ route('post.store')}}">@csrf
             <div class="w-full flex flex-col">
                 <label for="title" class="font-semibold mt-4">件名</label>
