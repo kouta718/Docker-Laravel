@@ -39,7 +39,12 @@ class PostController extends Controller
         return view('post.show', compact('post'));
     }
 
-    public function edit(Post $post) {
+    public function edit(Request $request, Post $post) {
+        if ($post->locked) {
+            $request->session()->flash('message', 'ロックされています');
+            return redirect()->back();
+        }
+
         return view('post.edit', compact('post'));
     }
 
@@ -60,8 +65,24 @@ class PostController extends Controller
     }
 
     public function destroy(Request $request, Post $post) {
+        if ($post->locked) {
+            $request->session()->flash('message', 'ロックされています');
+            return redirect()->back();
+        }
+
         $post->delete();
         $request->session()->flash('message', '削除しました');
         return redirect()->route('post.index');
     }
+
+
+    public function lock(Request $request, Post $post)
+    {
+        $post->locked = !$post->locked;
+        $post->save();
+        $message = $post->locked ? '投稿をロックしました。' : '投稿のロックを解除しました。';
+        $request->session()->flash('message', $message);
+        return redirect()->back();
+    }
+
 }
