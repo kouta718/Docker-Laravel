@@ -5,6 +5,11 @@
         </h2>
     </x-slot>
     <div class="max-w-7xl mx-auto px-6">
+        @if(session('message'))
+            <div class="text-red-600 font-bold">
+                {{session('message')}}
+            </div>
+        @endif
         <div class="bg-white w-full rounded-2xl" >
             <div class="mt-4 p-4">
                 <h1 class="text-lg font-semibold">
@@ -21,6 +26,16 @@
                         @method('delete')
                         <x-primary-button class="bg-red-700 ml-2">
                             削除
+                        </x-primary-button>
+                    </form>
+                    <form method="post" action="{{route('post.lock', $post)}}" class="flex-3">
+                        @csrf
+                        <x-primary-button class="bg-red-100 ml-2">
+                            @if ($post->locked)
+                                <img src="{{ asset('img/lock.png') }}" alt="lock" width="16" height="16">
+                            @else
+                                <img src="{{ asset('img/unlock.png') }}" alt="unlock" width="16" height="16">
+                            @endif
                         </x-primary-button>
                     </form>
                 </div>
