@@ -17,9 +17,9 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'=>fake()->text(20),
-            'body'=>fake()->text(50),
-            'user_id'=>\App\Models\User::factory(),
+            'title'=> '件名',
+            'body'=>'本文',
+            'user_id'=> 1,
         ];
     }
 }
